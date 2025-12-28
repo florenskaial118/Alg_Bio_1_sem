@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.8.25">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="Флоренская Лидия">
-<title>10&nbsp; БД трехмерных структур – 1_sem_algbio_book</title>
+<title>9&nbsp; БД трехмерных структур – 1_sem_algbio_book</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -72,10 +72,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-95f147d06fdb9f8ce149f95e323965f4.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-95f147d06fdb9f8ce149f95e323965f4.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-95f147d06fdb9f8ce149f95e323965f4.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-95f147d06fdb9f8ce149f95e323965f4.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-d7891495fd182cf708cbfa06f7443416.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-d7891495fd182cf708cbfa06f7443416.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-0daf5e02d85cd04e64c0669de423f052.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-d7891495fd182cf708cbfa06f7443416.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -103,14 +107,176 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 </head>
-<body class="nav-sidebar floating quarto-light">
+<body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Базы_данных.html">Базы данных</a></li><li class="breadcrumb-item"><a href="./Базы_данных_БД_трехмерных_структур.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">БД трехмерных структур</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Базы_данных.html">Базы данных</a></li><li class="breadcrumb-item"><a href="./Базы_данных_БД_трехмерных_структур.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">БД трехмерных структур</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -124,8 +290,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="./">1_sem_algbio_book</a> 
-        <div class="sidebar-tools-main">
-    <a href="https://github.com/florenskaial118" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/florenskaial118/Alg_Bio_1_sem.git" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
   <i class="bi"></i>
@@ -180,12 +347,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Основы генетики сложных признаков и GWAS</span></span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./NGS_exam.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Устный ответ на экзамене</span></span></a>
-  </div>
-</li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -200,43 +361,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Базы_данных_Алгоритмы_выравнивания.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Алгоритмы выравнивания</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Алгоритмы выравнивания</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Базы_данных_Алгоритмы_поиска.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Алгоритмы поиска</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Алгоритмы поиска</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Базы_данных_белковые_БД.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Белковые базы данных</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Белковые базы данных</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Базы_данных_БД_трехмерных_структур.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">БД трехмерных структур</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">БД трехмерных структур</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Базы_данных_функциональные_БД.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Фукнциональные БД</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Фукнциональные БД</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Базы_данных_филогенетика.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Филогенетические деревья</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Филогенетические деревья</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Базы_данных_аннотация_геномов.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Аннотация геномов: основные концепции и методы</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Аннотация геномов</span></span></a>
   </div>
 </li>
       </ul>
@@ -244,13 +405,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Алгоритмы_HW.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Алгоритмы и струкутры данных</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Алгоритмы и струкутры данных</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Интерпретация.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Анализ клинических данных</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Анализ клинических данных</span></span></a>
   </div>
 </li>
     </ul>
@@ -261,24 +422,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#%D0%BF%D0%B0%D1%80%D0%B0%D0%B4%D0%B8%D0%B3%D0%BC%D0%B0-%D0%B1%D0%B8%D0%BE%D0%B8%D0%BD%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%82%D0%B8%D0%BA%D0%B8" id="toc-парадигма-биоинформатики" class="nav-link active" data-scroll-target="#%D0%BF%D0%B0%D1%80%D0%B0%D0%B4%D0%B8%D0%B3%D0%BC%D0%B0-%D0%B1%D0%B8%D0%BE%D0%B8%D0%BD%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%82%D0%B8%D0%BA%D0%B8"><span class="header-section-number">10.1</span> Парадигма биоинформатики</a></li>
-  <li><a href="#%D0%BF%D0%B5%D1%80%D0%B2%D0%B8%D1%87%D0%BD%D0%B0%D1%8F-%D0%B8-%D0%B2%D1%82%D0%BE%D1%80%D0%B8%D1%87%D0%BD%D0%B0%D1%8F-%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%82%D1%83%D1%80%D0%B0" id="toc-первичная-и-вторичная-структура" class="nav-link" data-scroll-target="#%D0%BF%D0%B5%D1%80%D0%B2%D0%B8%D1%87%D0%BD%D0%B0%D1%8F-%D0%B8-%D0%B2%D1%82%D0%BE%D1%80%D0%B8%D1%87%D0%BD%D0%B0%D1%8F-%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%82%D1%83%D1%80%D0%B0"><span class="header-section-number">10.2</span> Первичная и вторичная структура</a></li>
-  <li><a href="#%D1%8F%D0%BC%D1%80" id="toc-ямр" class="nav-link" data-scroll-target="#%D1%8F%D0%BC%D1%80"><span class="header-section-number">10.3</span> ЯМР</a></li>
-  <li><a href="#pca-%D1%80%D0%B5%D0%BD%D0%B3%D1%82%D0%B3%D0%B5%D0%BD%D0%BD%D0%BE-%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%82%D1%83%D1%80%D0%BD%D1%8B%D0%B9-%D0%B0%D0%BD%D0%B0%D0%BB%D0%B8%D0%B7" id="toc-pca-ренгтгенно-структурный-анализ" class="nav-link" data-scroll-target="#pca-%D1%80%D0%B5%D0%BD%D0%B3%D1%82%D0%B3%D0%B5%D0%BD%D0%BD%D0%BE-%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%82%D1%83%D1%80%D0%BD%D1%8B%D0%B9-%D0%B0%D0%BD%D0%B0%D0%BB%D0%B8%D0%B7"><span class="header-section-number">10.4</span> PCA (ренгтгенно-структурный анализ)</a></li>
-  <li><a href="#%D0%BA%D1%80%D0%B8%D0%BE%D1%8D%D0%BB%D0%B5%D0%BA%D1%82%D1%80%D0%BE%D0%BD%D0%BD%D0%B0%D1%8F-%D0%BC%D0%B8%D0%BA%D1%80%D0%BE%D1%81%D0%BA%D0%BE%D0%BF%D0%B8%D1%8F-cryo-em" id="toc-криоэлектронная-микроскопия-cryo-em" class="nav-link" data-scroll-target="#%D0%BA%D1%80%D0%B8%D0%BE%D1%8D%D0%BB%D0%B5%D0%BA%D1%82%D1%80%D0%BE%D0%BD%D0%BD%D0%B0%D1%8F-%D0%BC%D0%B8%D0%BA%D1%80%D0%BE%D1%81%D0%BA%D0%BE%D0%BF%D0%B8%D1%8F-cryo-em"><span class="header-section-number">10.5</span> Криоэлектронная микроскопия (cryo-EM)</a></li>
-  <li><a href="#pbd-%D0%B1%D0%B0%D0%B7%D0%B0-%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85-3d-%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%82%D1%83%D1%80" id="toc-pbd-база-данных-3d-структур" class="nav-link" data-scroll-target="#pbd-%D0%B1%D0%B0%D0%B7%D0%B0-%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85-3d-%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%82%D1%83%D1%80"><span class="header-section-number">10.6</span> PBD: база данных 3D структур</a></li>
-  <li><a href="#pymol" id="toc-pymol" class="nav-link" data-scroll-target="#pymol"><span class="header-section-number">10.7</span> PyMol</a></li>
-  <li><a href="#alphafold" id="toc-alphafold" class="nav-link" data-scroll-target="#alphafold"><span class="header-section-number">10.8</span> AlphaFold</a></li>
-  <li><a href="#%D0%BC%D0%BE%D0%BB%D0%B5%D0%BA%D1%83%D0%BB%D1%8F%D1%80%D0%BD%D0%B0%D1%8F-%D0%B4%D0%B8%D0%BD%D0%B0%D0%BC%D0%B8%D0%BA%D0%B0" id="toc-молекулярная-динамика" class="nav-link" data-scroll-target="#%D0%BC%D0%BE%D0%BB%D0%B5%D0%BA%D1%83%D0%BB%D1%8F%D1%80%D0%BD%D0%B0%D1%8F-%D0%B4%D0%B8%D0%BD%D0%B0%D0%BC%D0%B8%D0%BA%D0%B0"><span class="header-section-number">10.9</span> Молекулярная динамика</a></li>
-  <li><a href="#%D0%B4%D0%BE%D0%BA%D0%B8%D0%BD%D0%B3" id="toc-докинг" class="nav-link" data-scroll-target="#%D0%B4%D0%BE%D0%BA%D0%B8%D0%BD%D0%B3"><span class="header-section-number">10.10</span> Докинг</a></li>
-  <li><a href="#%D0%BF%D1%80%D0%BE%D1%82%D0%B5%D0%BE%D0%BC%D0%B8%D0%BA%D0%B0" id="toc-протеомика" class="nav-link" data-scroll-target="#%D0%BF%D1%80%D0%BE%D1%82%D0%B5%D0%BE%D0%BC%D0%B8%D0%BA%D0%B0"><span class="header-section-number">10.11</span> Протеомика</a></li>
-  <li><a href="#%D1%81%D0%B5%D0%BC%D0%B8%D0%BD%D0%B0%D1%80-%D0%BF%D0%BE-%D0%B1%D0%B0%D0%B7%D0%B0%D0%BC-%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85-3d-%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%82%D1%83%D1%80" id="toc-семинар-по-базам-данных-3d-структур" class="nav-link" data-scroll-target="#%D1%81%D0%B5%D0%BC%D0%B8%D0%BD%D0%B0%D1%80-%D0%BF%D0%BE-%D0%B1%D0%B0%D0%B7%D0%B0%D0%BC-%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85-3d-%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%82%D1%83%D1%80"><span class="header-section-number">11</span> Семинар по базам данных 3D структур</a></li>
+<li><a href="#%D0%BF%D0%B0%D1%80%D0%B0%D0%B4%D0%B8%D0%B3%D0%BC%D0%B0-%D0%B1%D0%B8%D0%BE%D0%B8%D0%BD%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%82%D0%B8%D0%BA%D0%B8" id="toc-парадигма-биоинформатики" class="nav-link active" data-scroll-target="#%D0%BF%D0%B0%D1%80%D0%B0%D0%B4%D0%B8%D0%B3%D0%BC%D0%B0-%D0%B1%D0%B8%D0%BE%D0%B8%D0%BD%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%82%D0%B8%D0%BA%D0%B8"><span class="header-section-number">9.1</span> Парадигма биоинформатики</a></li>
+  <li><a href="#%D0%BF%D0%B5%D1%80%D0%B2%D0%B8%D1%87%D0%BD%D0%B0%D1%8F-%D0%B8-%D0%B2%D1%82%D0%BE%D1%80%D0%B8%D1%87%D0%BD%D0%B0%D1%8F-%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%82%D1%83%D1%80%D0%B0" id="toc-первичная-и-вторичная-структура" class="nav-link" data-scroll-target="#%D0%BF%D0%B5%D1%80%D0%B2%D0%B8%D1%87%D0%BD%D0%B0%D1%8F-%D0%B8-%D0%B2%D1%82%D0%BE%D1%80%D0%B8%D1%87%D0%BD%D0%B0%D1%8F-%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%82%D1%83%D1%80%D0%B0"><span class="header-section-number">9.2</span> Первичная и вторичная структура</a></li>
+  <li><a href="#%D1%8F%D0%BC%D1%80" id="toc-ямр" class="nav-link" data-scroll-target="#%D1%8F%D0%BC%D1%80"><span class="header-section-number">9.3</span> ЯМР</a></li>
+  <li><a href="#pca-%D1%80%D0%B5%D0%BD%D0%B3%D1%82%D0%B3%D0%B5%D0%BD%D0%BD%D0%BE-%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%82%D1%83%D1%80%D0%BD%D1%8B%D0%B9-%D0%B0%D0%BD%D0%B0%D0%BB%D0%B8%D0%B7" id="toc-pca-ренгтгенно-структурный-анализ" class="nav-link" data-scroll-target="#pca-%D1%80%D0%B5%D0%BD%D0%B3%D1%82%D0%B3%D0%B5%D0%BD%D0%BD%D0%BE-%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%82%D1%83%D1%80%D0%BD%D1%8B%D0%B9-%D0%B0%D0%BD%D0%B0%D0%BB%D0%B8%D0%B7"><span class="header-section-number">9.4</span> PCA (ренгтгенно-структурный анализ)</a></li>
+  <li><a href="#%D0%BA%D1%80%D0%B8%D0%BE%D1%8D%D0%BB%D0%B5%D0%BA%D1%82%D1%80%D0%BE%D0%BD%D0%BD%D0%B0%D1%8F-%D0%BC%D0%B8%D0%BA%D1%80%D0%BE%D1%81%D0%BA%D0%BE%D0%BF%D0%B8%D1%8F-cryo-em" id="toc-криоэлектронная-микроскопия-cryo-em" class="nav-link" data-scroll-target="#%D0%BA%D1%80%D0%B8%D0%BE%D1%8D%D0%BB%D0%B5%D0%BA%D1%82%D1%80%D0%BE%D0%BD%D0%BD%D0%B0%D1%8F-%D0%BC%D0%B8%D0%BA%D1%80%D0%BE%D1%81%D0%BA%D0%BE%D0%BF%D0%B8%D1%8F-cryo-em"><span class="header-section-number">9.5</span> Криоэлектронная микроскопия (cryo-EM)</a></li>
+  <li><a href="#pbd-%D0%B1%D0%B0%D0%B7%D0%B0-%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85-3d-%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%82%D1%83%D1%80" id="toc-pbd-база-данных-3d-структур" class="nav-link" data-scroll-target="#pbd-%D0%B1%D0%B0%D0%B7%D0%B0-%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85-3d-%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%82%D1%83%D1%80"><span class="header-section-number">9.6</span> PBD: база данных 3D структур</a></li>
+  <li><a href="#pymol" id="toc-pymol" class="nav-link" data-scroll-target="#pymol"><span class="header-section-number">9.7</span> PyMol</a></li>
+  <li><a href="#alphafold" id="toc-alphafold" class="nav-link" data-scroll-target="#alphafold"><span class="header-section-number">9.8</span> AlphaFold</a></li>
+  <li><a href="#%D0%BC%D0%BE%D0%BB%D0%B5%D0%BA%D1%83%D0%BB%D1%8F%D1%80%D0%BD%D0%B0%D1%8F-%D0%B4%D0%B8%D0%BD%D0%B0%D0%BC%D0%B8%D0%BA%D0%B0" id="toc-молекулярная-динамика" class="nav-link" data-scroll-target="#%D0%BC%D0%BE%D0%BB%D0%B5%D0%BA%D1%83%D0%BB%D1%8F%D1%80%D0%BD%D0%B0%D1%8F-%D0%B4%D0%B8%D0%BD%D0%B0%D0%BC%D0%B8%D0%BA%D0%B0"><span class="header-section-number">9.9</span> Молекулярная динамика</a></li>
+  <li><a href="#%D0%B4%D0%BE%D0%BA%D0%B8%D0%BD%D0%B3" id="toc-докинг" class="nav-link" data-scroll-target="#%D0%B4%D0%BE%D0%BA%D0%B8%D0%BD%D0%B3"><span class="header-section-number">9.10</span> Докинг</a></li>
+  <li><a href="#%D0%BF%D1%80%D0%BE%D1%82%D0%B5%D0%BE%D0%BC%D0%B8%D0%BA%D0%B0" id="toc-протеомика" class="nav-link" data-scroll-target="#%D0%BF%D1%80%D0%BE%D1%82%D0%B5%D0%BE%D0%BC%D0%B8%D0%BA%D0%B0"><span class="header-section-number">9.11</span> Протеомика</a></li>
+  <li><a href="#%D1%81%D0%B5%D0%BC%D0%B8%D0%BD%D0%B0%D1%80-%D0%BF%D0%BE-%D0%B1%D0%B0%D0%B7%D0%B0%D0%BC-%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85-3d-%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%82%D1%83%D1%80" id="toc-семинар-по-базам-данных-3d-структур" class="nav-link" data-scroll-target="#%D1%81%D0%B5%D0%BC%D0%B8%D0%BD%D0%B0%D1%80-%D0%BF%D0%BE-%D0%B1%D0%B0%D0%B7%D0%B0%D0%BC-%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85-3d-%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%82%D1%83%D1%80"><span class="header-section-number">10</span> Семинар по базам данных 3D структур</a></li>
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Базы_данных.html">Базы данных</a></li><li class="breadcrumb-item"><a href="./Базы_данных_БД_трехмерных_структур.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">БД трехмерных структур</span></a></li></ol></nav><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Базы_данных.html">Базы данных</a></li><li class="breadcrumb-item"><a href="./Базы_данных_БД_трехмерных_структур.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">БД трехмерных структур</span></a></li></ol></nav><div class="quarto-title">
 <h1 class="title">
-<span class="chapter-number">10</span>&nbsp; <span class="chapter-title">БД трехмерных структур</span>
+<span class="chapter-number">9</span>&nbsp; <span class="chapter-title">БД трехмерных структур</span>
 </h1>
 </div>
 
@@ -299,12 +460,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   
 
 
-</header><section id="парадигма-биоинформатики" class="level2" data-number="10.1"><h2 data-number="10.1" class="anchored" data-anchor-id="парадигма-биоинформатики">
-<span class="header-section-number">10.1</span> Парадигма биоинформатики</h2>
+</header><section id="парадигма-биоинформатики" class="level2" data-number="9.1"><h2 data-number="9.1" class="anchored" data-anchor-id="парадигма-биоинформатики">
+<span class="header-section-number">9.1</span> Парадигма биоинформатики</h2>
 <p>Сходство последовательности == сходство функций == родство Схожи гены и белки.</p>
 <p>Но функции обеспечивают именно структуры, а не просто последовательности</p>
-</section><section id="первичная-и-вторичная-структура" class="level2" data-number="10.2"><h2 data-number="10.2" class="anchored" data-anchor-id="первичная-и-вторичная-структура">
-<span class="header-section-number">10.2</span> Первичная и вторичная структура</h2>
+</section><section id="первичная-и-вторичная-структура" class="level2" data-number="9.2"><h2 data-number="9.2" class="anchored" data-anchor-id="первичная-и-вторичная-структура">
+<span class="header-section-number">9.2</span> Первичная и вторичная структура</h2>
 <ul>
 <li>Первичная - одномерная лиинейная последовательность аминокислот</li>
 <li>Вторичная - двумерное расположение элементов структуры. У ДНК мало элементов вторичной структуры, у РНК - много всего - шпильки, узлы и тд, а у белков - меньше, чнм у РНК:
@@ -316,58 +477,58 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
 <li>Третичная - трехмерная структура в пространстве. Как она определяется и хранится? Это тема сегодняшней лекции</li>
 <li>Четвертичная - <del>четвертичная</del> полидоменная структура из нескольких последовательностей.</li>
-</ul></section><section id="ямр" class="level2" data-number="10.3"><h2 data-number="10.3" class="anchored" data-anchor-id="ямр">
-<span class="header-section-number">10.3</span> ЯМР</h2>
+</ul></section><section id="ямр" class="level2" data-number="9.3"><h2 data-number="9.3" class="anchored" data-anchor-id="ямр">
+<span class="header-section-number">9.3</span> ЯМР</h2>
 <p>Ядра с ненулевым спином в сильном постоянном магнитной поле возбуждаются импульсами и регистрируются их резонансные переходы</p>
 <ul>
 <li>Исследует гибкие белки</li>
 <li>Применяется к белкам до 40 кДа</li>
 <li>Используются меченые изотопами образцы</li>
-</ul></section><section id="pca-ренгтгенно-структурный-анализ" class="level2" data-number="10.4"><h2 data-number="10.4" class="anchored" data-anchor-id="pca-ренгтгенно-структурный-анализ">
-<span class="header-section-number">10.4</span> PCA (ренгтгенно-структурный анализ)</h2>
+</ul></section><section id="pca-ренгтгенно-структурный-анализ" class="level2" data-number="9.4"><h2 data-number="9.4" class="anchored" data-anchor-id="pca-ренгтгенно-структурный-анализ">
+<span class="header-section-number">9.4</span> PCA (ренгтгенно-структурный анализ)</h2>
 <ol type="1">
 <li>Создание кристалла белка</li>
 <li>Он помещается в аппарат, на него подают рентгеновское излучение</li>
 <li>Оно выбивает электроны из атомов и возникает дифракционная картина на подложке</li>
 <li>С помощью обратного преобразования Фурье восстанавливают электронную плотность, а затем строят модель атомов белка</li>
 <li>Построение атомной модели и уточнение координат</li>
-</ol></section><section id="криоэлектронная-микроскопия-cryo-em" class="level2" data-number="10.5"><h2 data-number="10.5" class="anchored" data-anchor-id="криоэлектронная-микроскопия-cryo-em">
-<span class="header-section-number">10.5</span> Криоэлектронная микроскопия (cryo-EM)</h2>
+</ol></section><section id="криоэлектронная-микроскопия-cryo-em" class="level2" data-number="9.5"><h2 data-number="9.5" class="anchored" data-anchor-id="криоэлектронная-микроскопия-cryo-em">
+<span class="header-section-number">9.5</span> Криоэлектронная микроскопия (cryo-EM)</h2>
 <ol type="1">
 <li>Замораживание образца в витрифицированном льду без кристиаллизации</li>
 <li>Съемка на электронном микроскопе - множество 2D - кадров</li>
 <li>Сегментация и классификация частиц</li>
 <li>3D - реконструкция</li>
-</ol></section><section id="pbd-база-данных-3d-структур" class="level2" data-number="10.6"><h2 data-number="10.6" class="anchored" data-anchor-id="pbd-база-данных-3d-структур">
-<span class="header-section-number">10.6</span> PBD: база данных 3D структур</h2>
+</ol></section><section id="pbd-база-данных-3d-структур" class="level2" data-number="9.6"><h2 data-number="9.6" class="anchored" data-anchor-id="pbd-база-данных-3d-структур">
+<span class="header-section-number">9.6</span> PBD: база данных 3D структур</h2>
 <p>PDB формат содержит всю доступную метаинформацию и координаты каждого атома</p>
-</section><section id="pymol" class="level2" data-number="10.7"><h2 data-number="10.7" class="anchored" data-anchor-id="pymol">
-<span class="header-section-number">10.7</span> PyMol</h2>
+</section><section id="pymol" class="level2" data-number="9.7"><h2 data-number="9.7" class="anchored" data-anchor-id="pymol">
+<span class="header-section-number">9.7</span> PyMol</h2>
 <p>Программа для визуализации и манипуляции трехмернвми структурами биомолекул (белков, нуклеиновых кислот, комплексов)</p>
-</section><section id="alphafold" class="level2" data-number="10.8"><h2 data-number="10.8" class="anchored" data-anchor-id="alphafold">
-<span class="header-section-number">10.8</span> AlphaFold</h2>
+</section><section id="alphafold" class="level2" data-number="9.8"><h2 data-number="9.8" class="anchored" data-anchor-id="alphafold">
+<span class="header-section-number">9.8</span> AlphaFold</h2>
 <p>Нейросетевая модель, предсказывающая пространственную структуру белка по аминокислотной последовательности 1. Вход - ак последовательность белка 2. Поиск гомологий - построение множественного выравнивания (MSA) 3. Нейросеть предсказывает контакты и расстояния между остатками 4. Геометрический модуль реконструирует 3D- модель с атомными координатами 5. Оценка доверия для каждого участка (plDDT score)</p>
-</section><section id="молекулярная-динамика" class="level2" data-number="10.9"><h2 data-number="10.9" class="anchored" data-anchor-id="молекулярная-динамика">
-<span class="header-section-number">10.9</span> Молекулярная динамика</h2>
+</section><section id="молекулярная-динамика" class="level2" data-number="9.9"><h2 data-number="9.9" class="anchored" data-anchor-id="молекулярная-динамика">
+<span class="header-section-number">9.9</span> Молекулярная динамика</h2>
 <ul>
 <li>Силовое поле</li>
 <li>Начальные условия</li>
 <li>Граничные условия</li>
 <li>Шаг интегрирования</li>
 <li>Интегратор</li>
-</ul></section><section id="докинг" class="level2" data-number="10.10"><h2 data-number="10.10" class="anchored" data-anchor-id="докинг">
-<span class="header-section-number">10.10</span> Докинг</h2>
+</ul></section><section id="докинг" class="level2" data-number="9.10"><h2 data-number="9.10" class="anchored" data-anchor-id="докинг">
+<span class="header-section-number">9.10</span> Докинг</h2>
 <p>Более дешеыый аналог молекулярной динамики. Это компьютерный метод предсказания оптимальной ориентации и энергоэффективности комплекса между макромолекулой и лигандом на основе оценки взаимных взаимодействий.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="Структуры_данных/12.11.25/Докинг vs молдин.png" class="img-fluid figure-img"></p>
 <figcaption>Докинг vs Молекулярная динамика</figcaption></figure>
 </div>
-</section><section id="протеомика" class="level2" data-number="10.11"><h2 data-number="10.11" class="anchored" data-anchor-id="протеомика">
-<span class="header-section-number">10.11</span> Протеомика</h2>
+</section><section id="протеомика" class="level2" data-number="9.11"><h2 data-number="9.11" class="anchored" data-anchor-id="протеомика">
+<span class="header-section-number">9.11</span> Протеомика</h2>
 <p>Изучение всех белков организма</p>
 <p>Масс-спектрометрия: Белки - пептиды - спектры по массе - БД референсных белков и масс - список белков</p>
-</section><section id="семинар-по-базам-данных-3d-структур" class="level1" data-number="11"><h1 data-number="11">
-<span class="header-section-number">11</span> Семинар по базам данных 3D структур</h1>
+</section><section id="семинар-по-базам-данных-3d-структур" class="level1" data-number="10"><h1 data-number="10">
+<span class="header-section-number">10</span> Семинар по базам данных 3D структур</h1>
 <p><a href="https://www.rcsb.org/">PDB</a> - основной сайт</p>
 <p>Найдем тут 1GFL (Method: X-RAY DIFFRACTION) и скачаем .pdb файл</p>
 <div class="cell">
@@ -560,6 +721,19 @@ END                                                                             
 
 </section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
     const icon = "";
     const anchorJS = new window.AnchorJS();
     anchorJS.options = {
@@ -959,12 +1133,12 @@ END                                                                             
   });
   </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./Базы_данных_белковые_БД.html" class="pagination-link" aria-label="Белковые базы данных">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Белковые базы данных</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Белковые базы данных</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./Базы_данных_функциональные_БД.html" class="pagination-link" aria-label="Фукнциональные БД">
-        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Фукнциональные БД</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Фукнциональные БД</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
